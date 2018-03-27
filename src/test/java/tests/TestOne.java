@@ -60,7 +60,7 @@ public class TestOne extends AbstractTestCase {
 
         DataReader.getObjectFromData();
 
-        Assert.assertEquals(googleMenuPage.getBot().getTitle(), "enosh tsur - חיפוש ב-Google");
+        Assert.assertEquals(googleMenuPage.getBot().getTitle(), name + " - חיפוש ב-Google");
         report.log("Succes! title fits", Enums.Status.success);
 
         report.log("Data provider name: " + name);
