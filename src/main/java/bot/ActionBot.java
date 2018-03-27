@@ -1,6 +1,7 @@
 package bot;
 import org.openqa.selenium.By;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -70,6 +71,15 @@ public class ActionBot {
      */
     public ActionBot sendKeyboardKeys(By locator , Keys keys) {
         action.sendKeys(driver.findElement(locator), keys).perform();
+        return this;
+    }
+
+    /***
+     * Scrolling page
+     * @return Action Bot for flow
+     */
+    public ActionBot scrollPage() {
+        ((JavascriptExecutor)driver).executeScript("scroll(0,400)");
         return this;
     }
 }

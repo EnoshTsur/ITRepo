@@ -12,9 +12,6 @@ public class DataProviders {
      */
     @DataProvider(name = "data-provider")
     public Object[][] dataProvider(){
-        return new Object[][]
-                {
-                        {"hi"}
-                };
+        return DataReader.getObjectFromData().get();
     }
 }

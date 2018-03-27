@@ -40,8 +40,13 @@ public class GoogleMenuPage extends AbstractPage {
      * @return GoogleMenuPage for flow
      */
     public GoogleMenuPage clickOnSearch(){
+        bot.scrollPage();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(BTN)));
         bot.clickOn(BTN);
         return this;
     }
+
+
+
+
 }

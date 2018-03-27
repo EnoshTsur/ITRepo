@@ -32,4 +32,12 @@ public abstract class AbstractPage {
     public ActionBot getBot() {
         return this.bot;
     }
+
+    /***
+     * Getter for WebDriverWait
+     * @return WebDriverWait waait
+     */
+    public WebDriverWait getWait() {
+        return wait;
+    }
 }

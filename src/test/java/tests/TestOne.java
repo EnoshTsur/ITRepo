@@ -1,16 +1,20 @@
 package tests;
 
 import data.DataProviders;
+import data.DataReader;
 import drivers.Browser;
 import drivers.DriverFactory;
 import il.co.topq.difido.model.Enums;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import page.GoogleMenuPage;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class TestOne extends AbstractTestCase {
@@ -30,7 +34,7 @@ public class TestOne extends AbstractTestCase {
 
         if (optionalDriver.isPresent()) {
             driver = optionalDriver.get();
-        }else {
+        } else {
             report.log("Driver does not exist", Enums.Status.failure);
             report.endLevel();
         }
@@ -45,19 +49,30 @@ public class TestOne extends AbstractTestCase {
     /****
      * First test for google page
      */
-    @Test(dataProvider = "data-provider" , dataProviderClass = DataProviders.class)
-    public void test(String text) {
+    @Test(dataProvider = "data-provider", dataProviderClass = DataProviders.class)
+    public void test(String name) {
 
         report.log("Creating page Object");
         GoogleMenuPage googleMenuPage = new GoogleMenuPage(driver);
 
         report.log("Set the input search bar & click on the search button");
-        googleMenuPage.setInputSearch("enosh tsur").clickOnSearch();
+        googleMenuPage.setInputSearch(name).clickOnSearch();
+
+        DataReader.getObjectFromData();
+
+        Assert.assertEquals(googleMenuPage.getBot().getTitle(), "enosh tsur - חיפוש ב-Google");
+        report.log("Succes! title fits", Enums.Status.success);
+
+        report.log("Data provider name: " + name);
 
 
-        Assert.assertEquals(googleMenuPage.getBot().getTitle() , "enosh tsur - חיפוש ב-Google");
-        report.log("Succes! title fits" , Enums.Status.success);
+    }
 
-        report.log("Data provider:" + text);
+    /***
+     *Closing driver after each method
+     */
+    @AfterMethod
+    public void close(){
+        driver.close();
     }
 }
